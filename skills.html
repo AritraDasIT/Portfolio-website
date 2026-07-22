@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills | Aritra Das</title>
+    <style>
+        /* ───────────── RESET & BASE ───────────── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            background: #0b0d15;
+            color: #eef2f7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ───────────── SCROLLBAR ───────────── */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12162a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #6c5ce7, #00b4d8);
+            border-radius: 10px;
+        }
+
+        /* ───────────── ANIMATED BG ───────────── */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-glow span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: floatGlow 12s ease-in-out infinite alternate;
+        }
+
+        .bg-glow .g1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            background: #6c5ce7;
+            animation-duration: 14s;
+        }
+
+        .bg-glow .g2 {
+            width: 500px;
+            height: 500px;
+            bottom: -150px;
+            left: -100px;
+            background: #00b4d8;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+
+        .bg-glow .g3 {
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f77f00;
+            animation-duration: 16s;
+            animation-delay: 4s;
+            opacity: 0.15;
+        }
+
+        @keyframes floatGlow {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(60px, -40px) scale(1.2);
+            }
+        }
+
+        /* ───────────── HEADER / NAV ───────────── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 14px 40px;
+            background: rgba(11, 13, 21, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+        }
+
+        .navbar {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            cursor: default;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #b0b8d1;
+            transition: 0.3s;
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a78bfa, #38bdf8);
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #fff;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* ───────────── HERO / SKILLS PAGE ───────────── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 80px;
+        }
+
+        .hero-content {
+            max-width: 1300px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ─── Skills Card (glass) ─── */
+        .skills-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            padding: 50px 55px;
+            display: flex;
+            gap: 50px;
+            align-items: stretch;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        /* ─── Left column: Skills text ─── */
+        .skills-text {
+            flex: 1.2;
+        }
+
+        .skills-text h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .skills-text h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #eef2f7;
+            margin: 20px 0 12px 0;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skills-text h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .skills-text h2 .badge-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Skill tags */
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #c8cee8;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .skill-tag:hover {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: rgba(167, 139, 250, 0.3);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.15);
+        }
+
+        /* Category label inside tags */
+        .skill-category {
+            font-weight: 600;
+            color: #a78bfa;
+            font-size: 0.9rem;
+            margin-right: 2px;
+        }
+
+        /* Soft skills - chip style */
+        .soft-skill-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .soft-chip {
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.12);
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #b0d8f0;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .soft-chip:hover {
+            background: rgba(56, 189, 248, 0.18);
+            border-color: rgba(56, 189, 248, 0.3);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.12);
+        }
+
+        /* ─── Right column: Coding Animation ─── */
+        .skills-animation {
+            flex: 0 0 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* ─── CODING CHARACTER ANIMATION ─── */
+        .coding-scene {
+            position: relative;
+            width: 280px;
+            height: 300px;
+            animation: floatBob 4.2s ease-in-out infinite;
+        }
+
+        @keyframes floatBob {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* ─── Desk ─── */
+        .desk {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 240px;
+            height: 14px;
+            background: linear-gradient(180deg, #5c4a3a, #3d2f24);
+            border-radius: 4px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .desk::before {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 10%;
+            width: 80%;
+            height: 14px;
+            background: #3d2f24;
+            border-radius: 0 0 4px 4px;
+            opacity: 0.3;
+        }
+
+        /* ─── Chair ─── */
+        .chair {
+            position: absolute;
+            bottom: 24px;
+            left: 20px;
+            width: 50px;
+            height: 34px;
+            background: linear-gradient(180deg, #2a2a3a, #1a1a2a);
+            border-radius: 6px 6px 0 0;
+            z-index: 0;
+            box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .chair::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 8px;
+            background: #1a1a2a;
+            border-radius: 0 0 6px 6px;
+        }
+
+        /* ─── Monitor ─── */
+        .monitor {
+            position: absolute;
+            bottom: 24px;
+            right: 30px;
+            width: 110px;
+            height: 80px;
+            background: #0d0d18;
+            border-radius: 6px 6px 4px 4px;
+            border: 3px solid #2a2a3a;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .monitor::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 10px;
+            background: #2a2a3a;
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* ─── Monitor screen ─── */
+        .screen {
+            width: 100%;
+            height: 100%;
+            padding: 6px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            background: #0d1117;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screen-glow {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(56, 189, 248, 0.06);
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+
+        .code-line {
+            height: 5px;
+            border-radius: 2px;
+            opacity: 0.6;
+            animation: codePulse 2.8s ease-in-out infinite;
+        }
+
+        .code-line:nth-child(1) {
+            width: 70%;
+            background: linear-gradient(90deg, #a78bfa, #6c5ce7);
+            animation-delay: 0s;
+        }
+        .code-line:nth-child(2) {
+            width: 85%;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            animation-delay: 0.4s;
+        }
+        .code-line:nth-child(3) {
+            width: 50%;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            animation-delay: 0.8s;
+        }
+        .code-line:nth-child(4) {
+            width: 75%;
+            background: linear-gradient(90deg, #34d399, #10b981);
+            animation-delay: 1.2s;
+        }
+        .code-line:nth-child(5) {
+            width: 60%;
+            background: linear-gradient(90deg, #f472b6, #ec4899);
+            animation-delay: 1.6s;
+        }
+        .code-line:nth-child(6) {
+            width: 90%;
+            background: linear-gradient(90deg, #a78bfa, #6c5ce7);
+            animation-delay: 2.0s;
+        }
+        .code-line:nth-child(7) {
+            width: 45%;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            animation-delay: 2.4s;
+        }
+
+        /* Cursor blink on screen */
+        .cursor-blink {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            width: 4px;
+            height: 10px;
+            background: #38bdf8;
+            border-radius: 2px;
+            animation: blinkCursor 1s step-end infinite;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+
+        @keyframes blinkCursor {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes codePulse {
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scaleX(1);
+            }
+            50% {
+                opacity: 0.9;
+                transform: scaleX(1.02);
+            }
+        }
+
+        /* ─── Keyboard ─── */
+        .keyboard {
+            position: absolute;
+            bottom: 10px;
+            right: 52px;
+            width: 80px;
+            height: 16px;
+            background: linear-gradient(180deg, #2a2a3a, #1a1a2a);
+            border-radius: 4px;
+            z-index: 1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: perspective(200px) rotateX(8deg);
+        }
+
+        .keyboard::before {
+            content: '⌨';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.1);
+            letter-spacing: 2px;
+        }
+
+        /* ─── Character Body ─── */
+        .coder-body {
+            position: absolute;
+            bottom: 38px;
+            left: 38px;
+            width: 40px;
+            height: 52px;
+            background: linear-gradient(180deg, #4a6fa5, #2c4a7a);
+            border-radius: 12px 12px 6px 6px;
+            z-index: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: bodyBreathe 3.6s ease-in-out infinite;
+        }
+
+        @keyframes bodyBreathe {
+            0%,
+            100% {
+                transform: scaleY(1);
+            }
+            50% {
+                transform: scaleY(1.02);
+            }
+        }
+
+        /* ─── Character Head ─── */
+        .coder-head {
+            position: absolute;
+            bottom: 86px;
+            left: 32px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #ffe8d6, #f5d0b8);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            animation: headNod 4s ease-in-out infinite;
+        }
+
+        @keyframes headNod {
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(2deg);
+            }
+            75% {
+                transform: rotate(-2deg);
+            }
+        }
+
+        /* Hair */
+        .coder-hair {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 30px;
+            background: radial-gradient(ellipse at 30% 0%, #3d2b1f, #1f140e);
+            border-radius: 60% 60% 0 0 / 80% 80% 0 0;
+            z-index: 2;
+        }
+
+        .coder-hair::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 10%;
+            width: 80%;
+            height: 10px;
+            background: #3d2b1f;
+            border-radius: 0 0 50% 50%;
+        }
+
+        /* Eyes */
+        .coder-eyes {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 3;
+        }
+
+        .coder-eye {
+            width: 8px;
+            height: 10px;
+            background: #1f140e;
+            border-radius: 50%;
+            position: relative;
+            animation: blinkEyes 4.6s ease-in-out infinite;
+        }
+
+        .coder-eye::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 1px;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        @keyframes blinkEyes {
+            0%,
+            92%,
+            100% {
+                transform: scaleY(1);
+            }
+            94% {
+                transform: scaleY(0.05);
+            }
+        }
+
+        /* Mouth - coding focus (slight smile) */
+        .coder-mouth {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 7px;
+            border-bottom: 2.5px solid #b45f4a;
+            border-radius: 0 0 50% 50%;
+            z-index: 3;
+        }
+
+        /* ─── Arms typing ─── */
+        .coder-arm {
+            position: absolute;
+            width: 12px;
+            height: 36px;
+            background: linear-gradient(180deg, #f5d0b8, #e8bfa8);
+            border-radius: 20px;
+            z-index: 0;
+            transform-origin: top center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .coder-arm.left {
+            bottom: 48px;
+            left: 20px;
+            transform: rotate(30deg);
+            animation: typeLeft 0.8s ease-in-out infinite alternate;
+        }
+
+        .coder-arm.right {
+            bottom: 48px;
+            right: 100px;
+            transform: rotate(-30deg);
+            animation: typeRight 0.7s ease-in-out infinite alternate;
+        }
+
+        @keyframes typeLeft {
+            0% {
+                transform: rotate(25deg) translateY(0);
+            }
+            100% {
+                transform: rotate(40deg) translateY(-4px);
+            }
+        }
+
+        @keyframes typeRight {
+            0% {
+                transform: rotate(-25deg) translateY(0);
+            }
+            100% {
+                transform: rotate(-40deg) translateY(-4px);
+            }
+        }
+
+        /* Hands */
+        .coder-hand {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            background: #f5d0b8;
+            border-radius: 50%;
+            box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* ─── Floating code particles ─── */
+        .code-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .code-particle {
+            position: absolute;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: rgba(167, 139, 250, 0.15);
+            animation: floatCode 8s ease-in-out infinite;
+            font-weight: 600;
+        }
+
+        .code-particle:nth-child(1) {
+            top: 5%;
+            left: 2%;
+            animation-delay: 0s;
+            content: '{}';
+        }
+        .code-particle:nth-child(2) {
+            top: 15%;
+            right: 0%;
+            animation-delay: 1.5s;
+        }
+        .code-particle:nth-child(3) {
+            bottom: 30%;
+            left: -4%;
+            animation-delay: 3s;
+        }
+        .code-particle:nth-child(4) {
+            top: 50%;
+            right: -2%;
+            animation-delay: 4.5s;
+        }
+        .code-particle:nth-child(5) {
+            bottom: 10%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatCode {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translate(10px, -40px) rotate(10deg);
+                opacity: 0.05;
+            }
+        }
+
+        /* ─── Back button ─── */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 24px;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.10);
+            color: #b0b8d1;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: #a78bfa;
+            color: #fff;
+            transform: translateX(-4px);
+        }
+
+        /* ───────────── RESPONSIVE ───────────── */
+        @media (max-width: 968px) {
+            .skills-card {
+                flex-direction: column;
+                align-items: center;
+                padding: 35px 30px;
+                gap: 40px;
+            }
+
+            .skills-text h1 {
+                font-size: 2.2rem;
+                text-align: center;
+            }
+
+            .skills-text h2 {
+                justify-content: center;
+            }
+
+            .skill-tags {
+                justify-content: center;
+            }
+
+            .soft-skill-chips {
+                justify-content: center;
+            }
+
+            .skills-animation {
+                flex: 0 0 auto;
+                width: 100%;
+            }
+
+            .coding-scene {
+                transform: scale(0.85);
+            }
+
+            header {
+                padding: 10px 20px;
+            }
+            .nav-links {
+                gap: 14px;
+            }
+            .nav-links li a {
+                font-size: 0.78rem;
+            }
+            .logo {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                gap: 10px;
+                justify-content: center;
+            }
+            .nav-links li a {
+                font-size: 0.7rem;
+            }
+            .hero {
+                padding: 100px 16px 60px;
+            }
+            .skills-card {
+                padding: 25px 18px;
+                border-radius: 28px;
+            }
+            .skills-text h1 {
+                font-size: 1.8rem;
+            }
+            .skills-text h2 {
+                font-size: 1.1rem;
+            }
+            .skill-tag {
+                font-size: 0.75rem;
+                padding: 4px 14px;
+            }
+            .soft-chip {
+                font-size: 0.8rem;
+                padding: 6px 16px;
+            }
+            .coding-scene {
+                transform: scale(0.7);
+            }
+            .back-btn {
+                padding: 10px 22px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-glow">
+        <span class="g1"></span>
+        <span class="g2"></span>
+        <span class="g3"></span>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar">
+            <h2 class="logo">Aritra Das</h2>
+            <ul class="nav-links">
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="virtual.html">Virtual Experience</a></li>
+                <li><a href="certification.html">Certification</a></li>
+                <li><a href="extracurricular.html">Extracurricular</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SKILLS SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <div class="skills-card">
+
+                <!-- Left: Skills Text -->
+                <div class="skills-text">
+                    <h1>My Skills</h1>
+
+                    <!-- Technical Skills -->
+                    <h2><span class="badge-icon">⚡</span> Technical Skills</h2>
+
+                    <div class="skill-tags">
+                        <span class="skill-tag"><span class="skill-category">Languages:</span> Java, Python, C</span>
+                        <span class="skill-tag"><span class="skill-category">Core:</span> DSA, OOPs, DBMS, OS</span>
+                        <span class="skill-tag"><span class="skill-category">Backend:</span> Spring Boot</span>
+                        <span class="skill-tag"><span class="skill-category">Databases:</span> MySQL, MongoDB</span>
+                        <span class="skill-tag"><span class="skill-category">Web:</span> HTML, CSS, JavaScript</span>
+                        <span class="skill-tag"><span class="skill-category">Tools:</span> Git, GitHub, VS Code, IntelliJ</span>
+                        <span class="skill-tag"><span class="skill-category">Engg.:</span> SDLC, Debugging, Agile, Testing</span>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <h2><span class="badge-icon">🤝</span> Soft Skills</h2>
+
+                    <div class="soft-skill-chips">
+                        <span class="soft-chip">💡 Problem-Solving</span>
+                        <span class="soft-chip">🤝 Team Collaboration</span>
+                        <span class="soft-chip">⏳ Time Management</span>
+                        <span class="soft-chip">🔄 Adaptability</span>
+                        <span class="soft-chip">💬 Communication</span>
+                        <span class="soft-chip">🧠 Analytical Thinking</span>
+                    </div>
+
+                    <!-- Back Button -->
+                    <a href="index.html" class="back-btn">← Back to Home</a>
+                </div>
+
+                <!-- Right: Coding Animation -->
+                <div class="skills-animation">
+
+                    <!-- Floating code particles -->
+                    <div class="code-particles">
+                        <span class="code-particle">{ }</span>
+                        <span class="code-particle">&lt;/&gt;</span>
+                        <span class="code-particle">()</span>
+                        <span class="code-particle">[]</span>
+                        <span class="code-particle">if</span>
+                    </div>
+
+                    <div class="coding-scene">
+
+                        <!-- Desk -->
+                        <div class="desk"></div>
+
+                        <!-- Keyboard -->
+                        <div class="keyboard"></div>
+
+                        <!-- Monitor -->
+                        <div class="monitor">
+                            <div class="screen">
+                                <div class="screen-glow"></div>
+                                <div class="code-line"></div>
+                                <div class="code-line"></div>
+                                <div class="code-line"></div>
+                                <div class="code-line"></div>
+                                <div class="code-line"></div>
+                                <div class="code-line"></div>
+                                <div class="code-line"></div>
+                                <div class="cursor-blink"></div>
+                            </div>
+                        </div>
+
+                        <!-- Chair -->
+                        <div class="chair"></div>
+
+                        <!-- Character -->
+                        <div class="coder-body"></div>
+                        <div class="coder-head">
+                            <div class="coder-hair"></div>
+                            <div class="coder-eyes">
+                                <span class="coder-eye"></span>
+                                <span class="coder-eye"></span>
+                            </div>
+                            <div class="coder-mouth"></div>
+                        </div>
+
+                        <!-- Arms typing -->
+                        <div class="coder-arm left">
+                            <div class="coder-hand"></div>
+                        </div>
+                        <div class="coder-arm right">
+                            <div class="coder-hand"></div>
+                        </div>
+
+                    </div><!-- /coding-scene -->
+
+                </div><!-- /skills-animation -->
+
+            </div><!-- /skills-card -->
+
+        </div><!-- /hero-content -->
+    </section>
+
+</body>
+</html>

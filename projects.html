@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Aritra Das</title>
+    <style>
+        /* ───────────── RESET & BASE ───────────── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            background: #0b0d15;
+            color: #eef2f7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ───────────── SCROLLBAR ───────────── */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12162a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #6c5ce7, #00b4d8);
+            border-radius: 10px;
+        }
+
+        /* ───────────── ANIMATED BG ───────────── */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-glow span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: floatGlow 12s ease-in-out infinite alternate;
+        }
+
+        .bg-glow .g1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            background: #6c5ce7;
+            animation-duration: 14s;
+        }
+
+        .bg-glow .g2 {
+            width: 500px;
+            height: 500px;
+            bottom: -150px;
+            left: -100px;
+            background: #00b4d8;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+
+        .bg-glow .g3 {
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f77f00;
+            animation-duration: 16s;
+            animation-delay: 4s;
+            opacity: 0.15;
+        }
+
+        @keyframes floatGlow {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(60px, -40px) scale(1.2);
+            }
+        }
+
+        /* ───────────── HEADER / NAV ───────────── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 14px 40px;
+            background: rgba(11, 13, 21, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+        }
+
+        .navbar {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            cursor: default;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #b0b8d1;
+            transition: 0.3s;
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a78bfa, #38bdf8);
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #fff;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* ───────────── HERO / PROJECTS PAGE ───────────── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 130px 40px 80px;
+        }
+
+        .hero-content {
+            max-width: 1300px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ─── Projects Card (glass) ─── */
+        .projects-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            padding: 50px 55px;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .projects-card h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .projects-subtitle {
+            color: #8f97b5;
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+        }
+
+        /* ─── Project Grid ─── */
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* ─── Project Card ─── */
+        .project-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 28px 30px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-item:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(167, 139, 250, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-item .project-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .project-item h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #eef2f7;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .project-item .project-desc {
+            font-size: 0.92rem;
+            color: #b0b8d1;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        /* Tech tags */
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .tech-tag {
+            background: rgba(167, 139, 250, 0.10);
+            border: 1px solid rgba(167, 139, 250, 0.12);
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #c8cee8;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .tech-tag:hover {
+            background: rgba(167, 139, 250, 0.20);
+            border-color: rgba(167, 139, 250, 0.3);
+        }
+
+        /* Project link button */
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            color: #b0b8d1;
+            transition: 0.3s;
+            width: fit-content;
+            margin-top: auto;
+        }
+
+        .project-link:hover {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: #a78bfa;
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        .project-link .arrow {
+            transition: 0.3s;
+        }
+
+        .project-link:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* ─── Back button ─── */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 32px;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.10);
+            color: #b0b8d1;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: #a78bfa;
+            color: #fff;
+            transform: translateX(-4px);
+        }
+
+        /* ───────────── RESPONSIVE ───────────── */
+        @media (max-width: 968px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-card {
+                padding: 35px 30px;
+            }
+
+            .projects-card h1 {
+                font-size: 2.2rem;
+                text-align: center;
+            }
+
+            .projects-subtitle {
+                text-align: center;
+            }
+
+            header {
+                padding: 10px 20px;
+            }
+            .nav-links {
+                gap: 14px;
+            }
+            .nav-links li a {
+                font-size: 0.78rem;
+            }
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .back-btn {
+                display: flex;
+                justify-content: center;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                gap: 10px;
+                justify-content: center;
+            }
+            .nav-links li a {
+                font-size: 0.7rem;
+            }
+            .hero {
+                padding: 100px 16px 60px;
+            }
+            .projects-card {
+                padding: 25px 18px;
+                border-radius: 28px;
+            }
+            .projects-card h1 {
+                font-size: 1.8rem;
+            }
+            .project-item {
+                padding: 20px 18px;
+            }
+            .project-item h3 {
+                font-size: 1.05rem;
+            }
+            .project-item .project-desc {
+                font-size: 0.85rem;
+            }
+            .tech-tag {
+                font-size: 0.65rem;
+                padding: 3px 10px;
+            }
+            .project-link {
+                font-size: 0.8rem;
+                padding: 6px 16px;
+            }
+            .back-btn {
+                padding: 10px 22px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-glow">
+        <span class="g1"></span>
+        <span class="g2"></span>
+        <span class="g3"></span>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar">
+            <h2 class="logo">Aritra Das</h2>
+            <ul class="nav-links">
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="virtual.html">Virtual Experience</a></li>
+                <li><a href="certification.html">Certification</a></li>
+                <li><a href="extracurricular.html">Extracurricular</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- PROJECTS SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <div class="projects-card">
+
+                <h1>🚀 My Projects</h1>
+                <p class="projects-subtitle">A collection of my work — from web apps to machine learning systems.</p>
+
+                <div class="project-grid">
+
+                    <!-- 1. Routine Management System -->
+                    <div class="project-item">
+                        <div class="project-icon">📅</div>
+                        <h3>Routine Management System</h3>
+                        <p class="project-desc">
+                            Developed a Routine Management System using PHP, HTML, CSS, JavaScript, and MySQL following OOP principles.
+                            Features include managing schedules, classes, faculty, and resources within a college. Applied modular
+                            architecture, exception handling, and code optimization.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">OOP</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <span class="arrow">→</span>
+                        </a>
+                    </div>
+
+                    <!-- 2. UPI Offline Mesh -->
+                    <div class="project-item">
+                        <div class="project-icon">📱</div>
+                        <h3>UPI Offline Mesh</h3>
+                        <p class="project-desc">
+                            A digital payment application enabling UPI-based transactions in low or no internet connectivity.
+                            Built with a Spring Boot backend that demonstrates offline UPI payments routed through a Bluetooth-style
+                            mesh network. Focused on modular code and reusable components.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Bluetooth Mesh</span>
+                            <span class="tech-tag">REST API</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <span class="arrow">→</span>
+                        </a>
+                    </div>
+
+                    <!-- 3. Phishing Website Detection Using ML -->
+                    <div class="project-item">
+                        <div class="project-icon">🛡️</div>
+                        <h3>Phishing Website Detection Using ML</h3>
+                        <p class="project-desc">
+                            The objective is to accurately classify websites as legitimate or phishing by analysing extracted
+                            website features using supervised learning algorithms. Built with Python and Scikit-learn.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Scikit-learn</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">NumPy</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <span class="arrow">→</span>
+                        </a>
+                    </div>
+
+                    <!-- 4. SIR: Special Intensive Revision -->
+                    <div class="project-item">
+                        <div class="project-icon">🗳️</div>
+                        <h3>SIR — Voter Eligibility Predictor</h3>
+                        <p class="project-desc">
+                            A machine learning system designed to predict voter eligibility fairly and transparently, using
+                            hierarchical document verification and government-aligned rules. Ensures only eligible voters cast
+                            their votes before elections.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Data Science</span>
+                            <span class="tech-tag">Document Verification</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <span class="arrow">→</span>
+                        </a>
+                    </div>
+
+                    <!-- 5. CBT – Searching & Sorting -->
+                    <div class="project-item">
+                        <div class="project-icon">💻</div>
+                        <h3>CBT – Searching &amp; Sorting</h3>
+                        <p class="project-desc">
+                            An interactive, visual, self-paced learning experience focused on fundamental searching and sorting
+                            algorithms. Built with HTML, CSS, and JavaScript to help students grasp core computer science concepts.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Interactive Learning</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <span class="arrow">→</span>
+                        </a>
+                    </div>
+
+                    <!-- 6. DPI Engine - Deep Packet Inspection System (NEW) -->
+                    <div class="project-item">
+                        <div class="project-icon">🌐</div>
+                        <h3>DPI Engine – Deep Packet Inspection System</h3>
+                        <p class="project-desc">
+                            Deep Packet Inspection (DPI) technology examines the contents of network packets as they pass through
+                            a checkpoint. Unlike simple firewalls that only look at packet headers (source/destination IP), DPI
+                            inspects the packet payload for advanced threat detection, traffic analysis, and network security.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Network Security</span>
+                            <span class="tech-tag">Packet Analysis</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Scapy</span>
+                            <span class="tech-tag">Deep Learning</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            View Project <span class="arrow">→</span>
+                        </a>
+                    </div>
+
+                </div><!-- /project-grid -->
+
+                <a href="index.html" class="back-btn">← Back to Home</a>
+
+            </div><!-- /projects-card -->
+
+        </div><!-- /hero-content -->
+    </section>
+
+</body>
+</html>

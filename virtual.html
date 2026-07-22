@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Experience | Aritra Das</title>
+    <style>
+        /* ───────────── RESET & BASE ───────────── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            background: #0b0d15;
+            color: #eef2f7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ───────────── SCROLLBAR ───────────── */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12162a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #6c5ce7, #00b4d8);
+            border-radius: 10px;
+        }
+
+        /* ───────────── ANIMATED BG ───────────── */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-glow span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: floatGlow 12s ease-in-out infinite alternate;
+        }
+
+        .bg-glow .g1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            background: #6c5ce7;
+            animation-duration: 14s;
+        }
+
+        .bg-glow .g2 {
+            width: 500px;
+            height: 500px;
+            bottom: -150px;
+            left: -100px;
+            background: #00b4d8;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+
+        .bg-glow .g3 {
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f77f00;
+            animation-duration: 16s;
+            animation-delay: 4s;
+            opacity: 0.15;
+        }
+
+        @keyframes floatGlow {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(60px, -40px) scale(1.2);
+            }
+        }
+
+        /* ───────────── HEADER / NAV ───────────── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 14px 40px;
+            background: rgba(11, 13, 21, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+        }
+
+        .navbar {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            cursor: default;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #b0b8d1;
+            transition: 0.3s;
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a78bfa, #38bdf8);
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #fff;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* ───────────── HERO / VIRTUAL EXPERIENCE PAGE ───────────── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 130px 40px 80px;
+        }
+
+        .hero-content {
+            max-width: 1300px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ─── Virtual Experience Card (glass) ─── */
+        .virtual-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            padding: 50px 55px;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .virtual-card h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .virtual-subtitle {
+            color: #8f97b5;
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+        }
+
+        /* ─── Virtual Experience Grid ─── */
+        .virtual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        /* ─── Virtual Experience Card ─── */
+        .virtual-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 28px 30px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .virtual-item:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(167, 139, 250, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ─── Company Logo + Header Row ─── */
+        .virtual-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 10px;
+        }
+
+        .company-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(167, 139, 250, 0.2);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .company-logo:hover {
+            transform: scale(1.05);
+            border-color: rgba(167, 139, 250, 0.5);
+        }
+
+        .virtual-title-group {
+            flex: 1;
+        }
+
+        .virtual-title-group .company-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #a78bfa;
+        }
+
+        .virtual-title-group .role-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #eef2f7;
+            line-height: 1.2;
+        }
+
+        .virtual-title-group .location {
+            font-size: 0.8rem;
+            color: #8f97b5;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ─── About Role ─── */
+        .virtual-item .about-role {
+            font-size: 0.92rem;
+            color: #b0b8d1;
+            line-height: 1.6;
+            margin: 12px 0 16px 0;
+            flex: 1;
+        }
+
+        /* ─── Certificate Section ─── */
+        .cert-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .cert-section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6a7295;
+            font-weight: 600;
+        }
+
+        /* BIG Certificate Image — whole certificate visible */
+        .cert-image {
+            width: 80%;
+            height: 220px;
+            border-radius: 12px;
+            object-fit: contain;
+            /* ← shows full certificate without cropping */
+            border: 1px solid rgba(167, 139, 250, 0.12);
+            transition: 0.3s;
+            cursor: default;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px;
+        }
+
+        .cert-image:hover {
+            border-color: rgba(167, 139, 250, 0.4);
+            transform: scale(1.01);
+        }
+
+        /* ─── Back button ─── */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 32px;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.10);
+            color: #b0b8d1;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: #a78bfa;
+            color: #fff;
+            transform: translateX(-4px);
+        }
+
+        /* ───────────── RESPONSIVE ───────────── */
+        @media (max-width: 968px) {
+            .virtual-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .virtual-card {
+                padding: 35px 30px;
+            }
+
+            .virtual-card h1 {
+                font-size: 2.2rem;
+                text-align: center;
+            }
+
+            .virtual-subtitle {
+                text-align: center;
+            }
+
+            header {
+                padding: 10px 20px;
+            }
+            .nav-links {
+                gap: 14px;
+            }
+            .nav-links li a {
+                font-size: 0.78rem;
+            }
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .back-btn {
+                display: flex;
+                justify-content: center;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cert-image {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                gap: 10px;
+                justify-content: center;
+            }
+            .nav-links li a {
+                font-size: 0.7rem;
+            }
+            .hero {
+                padding: 100px 16px 60px;
+            }
+            .virtual-card {
+                padding: 25px 18px;
+                border-radius: 28px;
+            }
+            .virtual-card h1 {
+                font-size: 1.8rem;
+            }
+            .virtual-item {
+                padding: 20px 18px;
+            }
+            .virtual-header {
+                gap: 12px;
+            }
+            .company-logo {
+                width: 50px;
+                height: 50px;
+            }
+            .virtual-title-group .role-name {
+                font-size: 1rem;
+            }
+            .virtual-title-group .company-name {
+                font-size: 0.95rem;
+            }
+            .virtual-item .about-role {
+                font-size: 0.85rem;
+            }
+
+            .cert-image {
+                height: 150px;
+            }
+
+            .back-btn {
+                padding: 10px 22px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .cert-image {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-glow">
+        <span class="g1"></span>
+        <span class="g2"></span>
+        <span class="g3"></span>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar">
+            <h2 class="logo">Aritra Das</h2>
+            <ul class="nav-links">
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="virtual.html">Virtual Experience</a></li>
+                <li><a href="certification.html">Certification</a></li>
+                <li><a href="extracurricular.html">Extracurricular</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- VIRTUAL EXPERIENCE SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <div class="virtual-card">
+
+                <h1>🌐 Virtual Experience</h1>
+                <p class="virtual-subtitle">Remote internships and virtual programs that expanded my skills.</p>
+
+                <div class="virtual-grid">
+
+                    <!-- 1. Accenture — Virtual Experience -->
+                    <div class="virtual-item">
+                        <div class="virtual-header">
+                            <!-- 👇 Company Logo (pre‑uploaded) -->
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\Accenture-Logo.png"
+                                 alt="Accenture Logo" class="company-logo">
+
+                            <div class="virtual-title-group">
+                                <div class="company-name">Accenture</div>
+                                <div class="role-name">Virtual Experience</div>
+                                <div class="location">🌍 Remote</div>
+                            </div>
+                        </div>
+
+                        <p class="about-role">
+                            Completed practical software engineering tasks designed by Accenture.
+                            Worked on OOP, Code Refactoring, Continuous Integration, and Agile Planning.
+                            Gained hands-on experience in real-world software development practices.
+                        </p>
+
+                        <!-- 👇 Certificate (pre‑uploaded) — BIG -->
+                        <div class="cert-section">
+                            <span class="cert-section-label">📜 Certificate</span>
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\Accenture_Forage.jpg"
+                                 alt="Accenture Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                    <!-- 2. AWS — Virtual Experience -->
+                    <div class="virtual-item">
+                        <div class="virtual-header">
+                            <!-- 👇 Company Logo (pre‑uploaded) -->
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\aws.jfif"
+                                 alt="AWS Logo" class="company-logo">
+
+                            <div class="virtual-title-group">
+                                <div class="company-name">Amazon Web Services (AWS)</div>
+                                <div class="role-name">Virtual Experience</div>
+                                <div class="location">🌍 Remote</div>
+                            </div>
+                        </div>
+
+                        <p class="about-role">
+                            Designed a simple, scalable hosting architecture on AWS.
+                            Gained practical knowledge of cloud computing, EC2, S3, load balancing,
+                            and auto-scaling. Understood best practices for deploying scalable applications.
+                        </p>
+
+                        <!-- 👇 Certificate (pre‑uploaded) — BIG -->
+                        <div class="cert-section">
+                            <span class="cert-section-label">📜 Certificate</span>
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\AWS APAC_Forage_page-0001.jpg"
+                                 alt="AWS Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                </div><!-- /virtual-grid -->
+
+                <a href="index.html" class="back-btn">← Back to Home</a>
+
+            </div><!-- /virtual-card -->
+
+        </div><!-- /hero-content -->
+    </section>
+
+</body>
+</html>

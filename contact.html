@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Aritra Das</title>
+    <style>
+        /* ───────────── RESET & BASE ───────────── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            background: #0b0d15;
+            color: #eef2f7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ───────────── SCROLLBAR ───────────── */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12162a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #6c5ce7, #00b4d8);
+            border-radius: 10px;
+        }
+
+        /* ───────────── ANIMATED BG ───────────── */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-glow span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: floatGlow 12s ease-in-out infinite alternate;
+        }
+
+        .bg-glow .g1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            background: #6c5ce7;
+            animation-duration: 14s;
+        }
+
+        .bg-glow .g2 {
+            width: 500px;
+            height: 500px;
+            bottom: -150px;
+            left: -100px;
+            background: #00b4d8;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+
+        .bg-glow .g3 {
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f77f00;
+            animation-duration: 16s;
+            animation-delay: 4s;
+            opacity: 0.15;
+        }
+
+        @keyframes floatGlow {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(60px, -40px) scale(1.2);
+            }
+        }
+
+        /* ───────────── HEADER / NAV ───────────── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 14px 40px;
+            background: rgba(11, 13, 21, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+        }
+
+        .navbar {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            cursor: default;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #b0b8d1;
+            transition: 0.3s;
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a78bfa, #38bdf8);
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #fff;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* ───────────── HERO / CONTACT PAGE ───────────── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 130px 40px 80px;
+        }
+
+        .hero-content {
+            max-width: 1300px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ─── Contact Card (glass) ─── */
+        .contact-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            padding: 50px 55px;
+            width: 100%;
+            max-width: 1100px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        /* ─── Left Column: Contact Info ─── */
+        .contact-info h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .contact-info .subtitle {
+            color: #8f97b5;
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        /* ─── Contact Item ─── */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(167, 139, 250, 0.2);
+            transform: translateX(6px);
+        }
+
+        .contact-item .icon-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            background: rgba(167, 139, 250, 0.08);
+            border: 1px solid rgba(167, 139, 250, 0.1);
+        }
+
+        .contact-item .icon-circle.phone {
+            background: rgba(56, 189, 248, 0.08);
+            border-color: rgba(56, 189, 248, 0.1);
+        }
+
+        .contact-item .icon-circle.email {
+            background: rgba(167, 139, 250, 0.08);
+            border-color: rgba(167, 139, 250, 0.1);
+        }
+
+        .contact-item .icon-circle.linkedin {
+            background: rgba(10, 102, 194, 0.1);
+            border-color: rgba(10, 102, 194, 0.15);
+        }
+
+        .contact-item .contact-detail {
+            flex: 1;
+        }
+
+        .contact-item .contact-detail .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #6a7295;
+            font-weight: 600;
+        }
+
+        .contact-item .contact-detail .value {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #eef2f7;
+            margin-top: 1px;
+        }
+
+        .contact-item .contact-detail .value a {
+            color: #eef2f7;
+            transition: 0.3s;
+        }
+
+        .contact-item .contact-detail .value a:hover {
+            color: #a78bfa;
+        }
+
+        /* ─── Social / Action Icons ─── */
+        .contact-actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .contact-actions .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #b0b8d1;
+            transition: 0.3s;
+        }
+
+        .contact-actions .social-btn:hover {
+            background: rgba(167, 139, 250, 0.12);
+            border-color: rgba(167, 139, 250, 0.2);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ─── Right Column: Contact Form ─── */
+        .contact-form-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-form-side .form-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #eef2f7;
+            margin-bottom: 6px;
+        }
+
+        .contact-form-side .form-sub {
+            color: #8f97b5;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #b0b8d1;
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: #eef2f7;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: rgba(167, 139, 250, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.05);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #6a7295;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            padding: 12px 36px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: linear-gradient(135deg, #6c5ce7, #38bdf8);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 28px rgba(108, 92, 231, 0.2);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(108, 92, 231, 0.35);
+        }
+
+        /* ─── Back button ─── */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 28px;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.10);
+            color: #b0b8d1;
+            transition: 0.3s;
+            width: fit-content;
+        }
+
+        .back-btn:hover {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: #a78bfa;
+            color: #fff;
+            transform: translateX(-4px);
+        }
+
+        /* ───────────── RESPONSIVE ───────────── */
+        @media (max-width: 968px) {
+            .contact-card {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 35px 30px;
+            }
+
+            .contact-info h1 {
+                font-size: 2.2rem;
+                text-align: center;
+            }
+
+            .contact-info .subtitle {
+                text-align: center;
+            }
+
+            .contact-item {
+                padding: 14px 16px;
+            }
+
+            .contact-actions {
+                justify-content: center;
+            }
+
+            header {
+                padding: 10px 20px;
+            }
+            .nav-links {
+                gap: 14px;
+            }
+            .nav-links li a {
+                font-size: 0.78rem;
+            }
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .back-btn {
+                display: flex;
+                justify-content: center;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                gap: 10px;
+                justify-content: center;
+            }
+            .nav-links li a {
+                font-size: 0.7rem;
+            }
+            .hero {
+                padding: 100px 16px 60px;
+            }
+            .contact-card {
+                padding: 25px 18px;
+                border-radius: 28px;
+            }
+            .contact-info h1 {
+                font-size: 1.8rem;
+            }
+            .contact-item .icon-circle {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+            .contact-item .contact-detail .value {
+                font-size: 0.9rem;
+            }
+            .contact-actions .social-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            .back-btn {
+                padding: 10px 22px;
+                font-size: 0.85rem;
+            }
+            .form-group input,
+            .form-group textarea {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
+            .submit-btn {
+                padding: 10px 28px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-glow">
+        <span class="g1"></span>
+        <span class="g2"></span>
+        <span class="g3"></span>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar">
+            <h2 class="logo">Aritra Das</h2>
+            <ul class="nav-links">
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="virtual.html">Virtual Experience</a></li>
+                <li><a href="certification.html">Certification</a></li>
+                <li><a href="extracurricular.html">Extracurricular</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTACT SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <div class="contact-card">
+
+                <!-- ─── LEFT: Contact Info ─── -->
+                <div class="contact-info">
+                    <h1>📬 Get in Touch</h1>
+                    <p class="subtitle">
+                        Have a question, collaboration idea, or just want to connect?
+                        Reach out — I'd love to hear from you!
+                    </p>
+
+                    <!-- Phone -->
+                    <div class="contact-item">
+                        <div class="icon-circle phone">📞</div>
+                        <div class="contact-detail">
+                            <div class="label">Phone</div>
+                            <div class="value"><a href="tel:+919876543210">+91-8777250758</a></div>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="contact-item">
+                        <div class="icon-circle email">✉️</div>
+                        <div class="contact-detail">
+                            <div class="label">Email</div>
+                            <div class="value"><a href="mailto:aritradas@email.com">itdasaritra2001@gmail.com
+</a></div>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn -->
+                    <div class="contact-item">
+                        <div class="icon-circle linkedin">🔗</div>
+                        <div class="contact-detail">
+                            <div class="label">LinkedIn</div>
+                            <div class="value">
+                                <a href="https://www.linkedin.com/in/dasaritra2001/" target="_blank">
+                                    linkedin.com/in/aritradas
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Quick Actions -->
+                    <div class="contact-actions">
+                        <a href="tel:+91-8777250758" class="social-btn">📞 Call</a>
+                        <a href="mailto:aritradas@email.com" class="social-btn">✉️ Email</a>
+                        <a href="https://linkedin.com/in/aritradas" target="_blank" class="social-btn">🔗 LinkedIn</a>
+                    </div>
+
+                    <!-- Back Button -->
+                    <a href="index.html" class="back-btn">← Back to Home</a>
+                </div>
+
+                <!-- ─── RIGHT: Contact Form ─── -->
+                <div class="contact-form-side">
+                    <div class="form-title">💬 Send a Message</div>
+                    <div class="form-sub">I'll get back to you within 24 hours.</div>
+
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="you@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Tell me about your project, idea, or just say hello!"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">🚀 Send Message</button>
+                    </form>
+                </div>
+
+            </div><!-- /contact-card -->
+
+        </div><!-- /hero-content -->
+    </section>
+
+</body>
+</html>

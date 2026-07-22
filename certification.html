@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications | Aritra Das</title>
+    <style>
+        /* ───────────── RESET & BASE ───────────── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            background: #0b0d15;
+            color: #eef2f7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ───────────── SCROLLBAR ───────────── */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12162a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #6c5ce7, #00b4d8);
+            border-radius: 10px;
+        }
+
+        /* ───────────── ANIMATED BG ───────────── */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-glow span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: floatGlow 12s ease-in-out infinite alternate;
+        }
+
+        .bg-glow .g1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            background: #6c5ce7;
+            animation-duration: 14s;
+        }
+
+        .bg-glow .g2 {
+            width: 500px;
+            height: 500px;
+            bottom: -150px;
+            left: -100px;
+            background: #00b4d8;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+
+        .bg-glow .g3 {
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f77f00;
+            animation-duration: 16s;
+            animation-delay: 4s;
+            opacity: 0.15;
+        }
+
+        @keyframes floatGlow {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(60px, -40px) scale(1.2);
+            }
+        }
+
+        /* ───────────── HEADER / NAV ───────────── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 14px 40px;
+            background: rgba(11, 13, 21, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+        }
+
+        .navbar {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            cursor: default;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #b0b8d1;
+            transition: 0.3s;
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a78bfa, #38bdf8);
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #fff;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* ───────────── HERO / CERTIFICATION PAGE ───────────── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 130px 40px 80px;
+        }
+
+        .hero-content {
+            max-width: 1300px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ─── Certification Card (glass) ─── */
+        .cert-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            padding: 50px 55px;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .cert-card h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .cert-subtitle {
+            color: #8f97b5;
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+        }
+
+        /* ─── Certification Grid ─── */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        /* ─── Certification Item ─── */
+        .cert-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 28px 30px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cert-item:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(167, 139, 250, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ─── Header with Logo ─── */
+        .cert-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .company-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(167, 139, 250, 0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .company-logo:hover {
+            transform: scale(1.05);
+            border-color: rgba(167, 139, 250, 0.4);
+        }
+
+        .cert-title-group {
+            flex: 1;
+        }
+
+        .cert-title-group .cert-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #eef2f7;
+            line-height: 1.3;
+        }
+
+        .cert-title-group .cert-org {
+            font-size: 0.8rem;
+            color: #a78bfa;
+            font-weight: 500;
+        }
+
+        /* ─── Certificate Image ─── */
+        .cert-image-wrapper {
+            margin-top: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+            transition: 0.3s;
+        }
+
+        .cert-image-wrapper:hover {
+            border-color: rgba(167, 139, 250, 0.2);
+        }
+
+        .cert-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            display: block;
+            padding: 6px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: 0.3s;
+        }
+
+        .cert-image:hover {
+            transform: scale(1.01);
+        }
+
+        /* ─── Back button ─── */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 32px;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.10);
+            color: #b0b8d1;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: #a78bfa;
+            color: #fff;
+            transform: translateX(-4px);
+        }
+
+        /* ───────────── RESPONSIVE ───────────── */
+        @media (max-width: 968px) {
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-card {
+                padding: 35px 30px;
+            }
+
+            .cert-card h1 {
+                font-size: 2.2rem;
+                text-align: center;
+            }
+
+            .cert-subtitle {
+                text-align: center;
+            }
+
+            header {
+                padding: 10px 20px;
+            }
+            .nav-links {
+                gap: 14px;
+            }
+            .nav-links li a {
+                font-size: 0.78rem;
+            }
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .back-btn {
+                display: flex;
+                justify-content: center;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                gap: 10px;
+                justify-content: center;
+            }
+            .nav-links li a {
+                font-size: 0.7rem;
+            }
+            .hero {
+                padding: 100px 16px 60px;
+            }
+            .cert-card {
+                padding: 25px 18px;
+                border-radius: 28px;
+            }
+            .cert-card h1 {
+                font-size: 1.8rem;
+            }
+            .cert-item {
+                padding: 20px 18px;
+            }
+            .cert-header {
+                gap: 12px;
+            }
+            .company-logo {
+                width: 46px;
+                height: 46px;
+            }
+            .cert-title-group .cert-name {
+                font-size: 0.85rem;
+            }
+            .cert-image {
+                height: 110px;
+            }
+            .back-btn {
+                padding: 10px 22px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .cert-image {
+                height: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-glow">
+        <span class="g1"></span>
+        <span class="g2"></span>
+        <span class="g3"></span>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar">
+            <h2 class="logo">Aritra Das</h2>
+            <ul class="nav-links">
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="virtual.html">Virtual Experience</a></li>
+                <li><a href="certification.html">Certification</a></li>
+                <li><a href="extracurricular.html">Extracurricular</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CERTIFICATION SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <div class="cert-card">
+
+                <h1>📜 Certifications</h1>
+                <p class="cert-subtitle">My professional certifications and achievements across various domains.</p>
+
+                <div class="cert-grid">
+
+                    <!-- 1. Face Recognition - AI-For-INDIA -->
+                    <div class="cert-item">
+                        <div class="cert-header">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\images (1).jfif"
+                                 alt="AI-For-INDIA Logo" class="company-logo">
+                            <div class="cert-title-group">
+                                <div class="cert-name">Face Recognition Application</div>
+                                <div class="cert-org">AI-For-INDIA Event</div>
+                            </div>
+                        </div>
+                        <div class="cert-image-wrapper">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\GuviCertification - Face_Recognition_App.png"
+                                 alt="Face Recognition Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                    <!-- 2. GFG Cloud Bootcamp -->
+                    <div class="cert-item">
+                        <div class="cert-header">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\images.jfif"
+                                 alt="GeeksforGeeks Logo" class="company-logo">
+                            <div class="cert-title-group">
+                                <div class="cert-name">GFG Cloud Bootcamp</div>
+                                <div class="cert-org">GeeksforGeeks — Sponsored by Google</div>
+                            </div>
+                        </div>
+                        <div class="cert-image-wrapper">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\cloud.jfif"
+                                 alt="GFG Cloud Bootcamp Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                    <!-- 3. Introduction to NoSQL - Infosys -->
+                    <div class="cert-item">
+                        <div class="cert-header">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\images (2).jfif"
+                                 alt="Infosys Logo" class="company-logo">
+                            <div class="cert-title-group">
+                                <div class="cert-name">Introduction to NoSQL Databases</div>
+                                <div class="cert-org">Infosys</div>
+                            </div>
+                        </div>
+                        <div class="cert-image-wrapper">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\info.jfif"
+                                 alt="NoSQL Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                    <!-- 4. Microsoft - Power Virtual Agents -->
+                    <div class="cert-item">
+                        <div class="cert-header">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\images (1).png"
+                                 alt="Microsoft Logo" class="company-logo">
+                            <div class="cert-title-group">
+                                <div class="cert-name">Create Bots with Power Virtual Agents</div>
+                                <div class="cert-org">Microsoft</div>
+                            </div>
+                        </div>
+                        <div class="cert-image-wrapper">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\Screenshot (188).png"
+                                 alt="Microsoft Power Virtual Agents Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                    <!-- 5. GUVI - Data Engineering & Bigdata -->
+                    <div class="cert-item">
+                        <div class="cert-header">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\images (1).jfif"
+                                 alt="GUVI Logo" class="company-logo">
+                            <div class="cert-title-group">
+                                <div class="cert-name">Introduction to Data Engineering &amp; Bigdata</div>
+                                <div class="cert-org">GUVI Geek Networks — IITM Research Park</div>
+                            </div>
+                        </div>
+                        <div class="cert-image-wrapper">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\bigdata.jfif"
+                                 alt="GUVI Data Engineering Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                    <!-- 6. Google - AI-Powered Performance Ads -->
+                    <div class="cert-item">
+                        <div class="cert-header">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\channels4_profile.jpg"
+                                 alt="Google Logo" class="company-logo">
+                            <div class="cert-title-group">
+                                <div class="cert-name">AI-Powered Performance Ads</div>
+                                <div class="cert-org">Google</div>
+                            </div>
+                        </div>
+                        <div class="cert-image-wrapper">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\go.jfif"
+                                 alt="Google AI-Powered Ads Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                    <!-- 7. Test Automation - GFG -->
+                    <div class="cert-item">
+                        <div class="cert-header">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\images.jfif"
+                                 alt="GeeksforGeeks Logo" class="company-logo">
+                            <div class="cert-title-group">
+                                <div class="cert-name">Test Automation — Java, Selenium WebDriver &amp; Cucumber</div>
+                                <div class="cert-org">GeeksforGeeks</div>
+                            </div>
+                        </div>
+                        <div class="cert-image-wrapper">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\Test Automation with Java-GFG_page-0001.jpg"
+                                 alt="Test Automation Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                    <!-- 8. Web Development - PBA Institute -->
+                    <div class="cert-item">
+                        <div class="cert-header">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\unnamed.png"
+                                 alt="PBA Institute Logo" class="company-logo">
+                            <div class="cert-title-group">
+                                <div class="cert-name">Web Development</div>
+                                <div class="cert-org">PBA Institute</div>
+                            </div>
+                        </div>
+                        <div class="cert-image-wrapper">
+                            <img src="D:\EVERYTHING  ABOUT CODE\WEB DESIGN\PERSONAL PORTFOLIO Website\pba.jfif"
+                                 alt="Web Development Certificate" class="cert-image">
+                        </div>
+                    </div>
+
+                </div><!-- /cert-grid -->
+
+                <a href="index.html" class="back-btn">← Back to Home</a>
+
+            </div><!-- /cert-card -->
+
+        </div><!-- /hero-content -->
+    </section>
+
+</body>
+</html>
